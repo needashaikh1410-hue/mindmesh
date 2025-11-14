@@ -220,14 +220,15 @@ else:
                 ax.tick_params(colors="white")
                 ax.grid(True, color="#444")
                 st.pyplot(fig)
-            else:
-                 new_week_modules = st.number_input("Modules completed this week", min_value=0, key="new_week_input")
-                 st.info("No weekly progress data yet. Add a week to begin tracking 📈")
-            st.session_state.new_week_modules = st.number_input("Modules completed this week", min_value=0, key="new_week_input")
+            new_week_modules = st.number_input("Modules completed this week", min_value=0, key="new_week_input")
+            st.session_state.new_week_modules = new_week_modules
+
+            if not st.session_state.progress_data["weekly_progress"]:
+                st.info("No weekly progress data yet. Add a week to begin tracking 📈")
 
             if st.button("➕ Add Week"):
                 st.session_state.progress_data["weekly_progress"].append(st.session_state.new_week_modules)
-                st.session_state.new_week_modules=0
+                st.session_state.new_week_modules = 0
                 st.rerun()
 
                  
